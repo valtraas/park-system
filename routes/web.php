@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KeluarController;
+use App\Http\Controllers\MasukController;
+use App\Http\Controllers\ParkirController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +19,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing.landing',[
+        'title'=>'Home'
+    ]);
+})->name('home');
+
+// * Authenticate 
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'index')->name('login.index');
+    Route::post('/login', 'auth')->name('login.auth');
+    // * logout
+    Route::post('/logout','logout')->name('logout');
+});
+Route::get('/test',function(){
+    return view('admin.operator.operator',[
+        'title'=>'Parking'
+    ]);
+})->middleware();
+
+Route::prefix('/dashboard/')->middleware('auth')->group(function () {
+    
+    // * Admin
+    Route::resource('user/management', UserController::class);
+    Route::resource('kendaraan/parkir', ParkirController::class);
+    //  * Operator Masuk
+    Route::resource('kendaraan/masuk', MasukController::class);
+    // * Operator Keluar
+    Route::resource('kendaraan/keluar',KeluarController::class);
 });

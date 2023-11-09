@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Parkir;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +21,27 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+            UserSeeder::class,
+            KendaraanSeeder::class
+        ]);
+
+        $role = [
+            'Admin',
+            'Operator Masuk',
+            'Operator Keluar'
+        ];
+
+        for ($i=0; $i < count($role) ; $i++) { 
+            Role::create([
+                'nama'=>$role[$i]
+            ]);
+        }
+
+        Parkir::factory(5)->create();
+
+        
+        
     }
 }

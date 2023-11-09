@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .bg-ground {
+        @apply bg-gradient-to-b from-sea to-putih;
+    }
+}
