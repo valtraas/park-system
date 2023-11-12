@@ -14,6 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;600;700&family=Fira+Sans:wght@500&family=Poppins:wght@300;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon" href="{{ asset('image/icon.png') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body class="font-poppin">
@@ -26,33 +27,36 @@
     @notifyJs
 
     <script>
-    const content = document.querySelector('#content')
+        const content = document.querySelector('#content')
+
         function toggleSidebar() {
-            content.classList.toggle('md:pl-[280px]')
+            content.classList.toggle('pl-[180px]')
             document.querySelector('.sidebar').classList.toggle('hidden')
+            document.querySelector('.sidebar').classList.toggle('lg:left-0')
             document.querySelector('.sidebar').classList.toggle('left-[-300px]')
         }
 
         function previewImage() {
-  // menangkap inputan image
-  const image = document.querySelector('#image');
-  
-  // mengambil tag image
-  const imgPreview = document.querySelector('.img-preview');
-  
-  // membuat display block pada tag img kosong
-  imgPreview.style.display = 'block';
-  
-  // mengambil data gambar
-  const oFReader = new FileReader();
-  oFReader.readAsDataURL(image.files[0]);
-  
-  // ketika di load
-  oFReader.onload = function(oFREvent) {
-    imgPreview.src = oFREvent.target.result;
-  };
-}
+            // menangkap inputan image
+            const image = document.querySelector('#image');
+
+            // mengambil tag image
+            const imgPreview = document.querySelector('.img-preview');
+
+            // membuat display block pada tag img kosong
+            imgPreview.style.display = 'block';
+
+            // mengambil data gambar
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            // ketika di load
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            };
+        }
     </script>
-   
+
 </body>
+
 </html>

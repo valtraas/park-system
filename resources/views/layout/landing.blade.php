@@ -26,7 +26,7 @@
         @auth
         <div>
             <div class="flex items-center gap-2 cursor-pointer" id="profile">
-                <img src="https://source.unsplash.com/50x50?men" alt="" class="rounded-full inline mx-2">
+                <img src="{{ asset('profile.png') }}" alt="" class="rounded-full inline mx-2">
                 <span class="text-white">{{ Auth::user()->username }}</span>
                 <i class="fa-solid fa-angle-down text-white"></i>
             </div>

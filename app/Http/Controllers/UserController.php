@@ -15,14 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $rekap = new loginActivity();
         return view('admin.operator.operator',[
             'title'=>'List Operator',
-            'operator'=>User::where('role_id',2)->orWhere('role_id',3)->latest()->get(),
-            'login'=>loginActivity::whereHas('user', function ($query) {
-                $query->where('role_id', '!=', 1);
-            })
-            ->with('user') 
-            ->latest()->get()
+            'operator'=>User::where('role_id','!=',1)->Operator(request('search'))->latest()->get(),
+            'login'=>$rekap->rekapLogin(1)->Rekap(request('search'))->latest()->get()
         ]);
     }
 

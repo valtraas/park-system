@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Parkir::factory(5)->create();
+        Parkir::factory(20)->create();
 
         
         

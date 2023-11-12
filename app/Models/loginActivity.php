@@ -15,4 +15,18 @@ class loginActivity extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function rekapLogin($role)
+    {
+        return $this->with('user')->whereHas('user', function ($query) use ($role) {
+            $query->where('role_id', '!=', $role);
+        });
+    }
+
+    public function scopeRekap($query, $operator)
+    {
+        $query->whereHas('user', function ($query) use ($operator) {
+            $query->where('nama', 'like', '%' . $operator . '%')->orWhere('username', 'like', '%' . $operator . '%');
+        });
+    }
 }

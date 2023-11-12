@@ -56,7 +56,21 @@ class User extends Authenticatable
         return $this->hasMany(Parkir::class);
     }
 
-    public function loginActivity(){
+    public function loginActivity()
+    {
         return $this->hasMany(loginActivity::class);
+    }
+
+    public function scopeOperator($query, $filter)
+    {
+        $query->when($filter ?? false, function ($query, $search) {
+            return $query->where('nama', 'like', '%' . $search . '%')->orWhere('username','like','%'.$search.'%');
+        });
+    }
+
+    public function pendapatan() {
+        return $this->hasMany(Parkir::class)
+        ->whereDate('tanggal_keluar',today())
+        ->where('status','keluar')->sum('harga');
     }
 }

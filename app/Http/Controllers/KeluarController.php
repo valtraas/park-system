@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kendaraan;
 use App\Models\Parkir;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,8 @@ class KeluarController extends Controller
     {
         return view('operator.keluar.keluar',[
             'title'=>'Kendaraan Keluar',
-            'parkir'=>Parkir::latest()->get(),
+            'parkir'=>Parkir::Park(request(['search','tanggalMasuk','tanggalKeluar','status','kendaraan']))->latest()->get(),
+            'kendaraan'=>Kendaraan::all(),
         ]);
     }
 
@@ -56,10 +59,14 @@ class KeluarController extends Controller
      */
     public function update(Request $request, Parkir $keluar)
     {
-        
+        // dd('kelr');
+        $time = Carbon::now();
         $keluar->update([
-            'status' => $request->input('status'),
-            'user_id' => Auth::user()->id
+            'status' => "Keluar",
+            'harga'=>$request->input('harga'),
+            'user_id' => Auth::user()->id,
+            'jam_keluar'=>$time,
+            'tanggal_keluar'=>$time
         ]);
         notify()->success('Kendaraan keluar');
         return redirect()->back();

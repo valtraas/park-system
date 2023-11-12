@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kendaraan;
 use App\Models\Parkir;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class ParkirController extends Controller
          
         return view('admin.parkir.parkir',[
             'title'=>'List Parkir',
-            'park'=>Parkir::latest()->get()
+            'parkir'=>Parkir::Park(request(['search','tanggalMasuk','tanggalKeluar','status','kendaraan']))->latest()->get(),
+            'kendaraan'=>Kendaraan::all()
         ]);
     }
 

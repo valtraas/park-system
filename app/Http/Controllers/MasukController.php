@@ -50,6 +50,7 @@ class MasukController extends Controller
         $validate['status'] = 'Masuk';
         $validate['jam_masuk'] = $date;
         $validate['tanggal_masuk'] = $date;
+        $validate['harga'] = $request->input('harga');
 
         $validate['slug'] = Str::slug($validate['nomor_polisi']);
         $validate['gambar'] = $request->file('gambar')->store('gambar-kendaraan');

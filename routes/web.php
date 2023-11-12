@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KeluarController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\ParkirController;
+use App\Http\Controllers\pendapatanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,17 +32,18 @@ Route::controller(AuthController::class)->group(function () {
     // * logout
     Route::post('/logout','logout')->name('logout');
 });
-Route::get('/test',function(){
-    return view('admin.operator.operator',[
-        'title'=>'Parking'
-    ]);
-})->middleware();
 
 Route::prefix('/dashboard/')->middleware('auth')->group(function () {
     
     // * Admin
-    Route::resource('user/management', UserController::class);
-    Route::resource('kendaraan/parkir', ParkirController::class);
+    Route::middleware('admin')->group(function(){
+        Route::resource('user/management', UserController::class);
+        Route::resource('kendaraan/parkir', ParkirController::class);
+        Route::controller(pendapatanController::class)->prefix('/pendapatan')->group(function(){
+            Route::get('/parkir','parkir')->name('pendapatan.parkir');
+            Route::get('/parkir/print','print')->name('pendapatan.print');
+        });
+    });
     //  * Operator Masuk
     Route::resource('kendaraan/masuk', MasukController::class);
     // * Operator Keluar

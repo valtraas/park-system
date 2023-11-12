@@ -1,6 +1,21 @@
 @extends('layout.dashboard')
+@section('search')
+    <form action="{{ route('masuk.index') }}">
+
+        <div class="p-2.5 flex items-center rounded-md px-4 duration-300  bg-gray-700 text-white">
+            <i class="fa-solid fa-magnifying-glass text-sm"></i>
+            <input type="text" placeholder="search" class="text-[15px] ml-4 w-full bg-transparent focus:outline-none"
+                name="search" value="{{ request('search') }}">
+        </div>
+    </form>
+@endsection
+
 @section('content')
     <div class="container mt-28  pb-16 md:pl-[280px] px-[30px] md:px-0" id="content">
+        <p class=" text-2xl text-active mb-10 ">
+            <i class="fa-solid fa-car me-2"></i>
+         Operator Masuk
+        </p>
         <a href={{ route('masuk.create') }} class="border border-active w-[20%] p-3 rounded-xl hover:bg-active hover:text-white duration-300" >
                 <i class="fa-solid fa-car me-2"></i>
                 Kendaraan parkir
