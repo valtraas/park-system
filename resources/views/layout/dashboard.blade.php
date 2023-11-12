@@ -13,7 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;600;700&family=Fira+Sans:wght@500&family=Poppins:wght@300;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="icon" href="{{ asset('image/icon.png') }}">
+    <link rel="icon" href="{{ asset('icon.png') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 

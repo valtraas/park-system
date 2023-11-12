@@ -45,7 +45,7 @@ Route::prefix('/dashboard/')->middleware('auth')->group(function () {
         });
     });
     //  * Operator Masuk
-    Route::resource('kendaraan/masuk', MasukController::class);
+    Route::resource('kendaraan/masuk', MasukController::class)->middleware('Operator.masuk');
     // * Operator Keluar
-    Route::resource('kendaraan/keluar',KeluarController::class);
+    Route::resource('kendaraan/keluar',KeluarController::class)->middleware('Operator.keluar');
 });

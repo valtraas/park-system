@@ -15,6 +15,8 @@
         rel="stylesheet">
     @vite('resources/css/app.css')
     <script src="https://kit.fontawesome.com/72bae55f93.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{{ asset('icon.png') }}">
+
     @notifyCss
 </head>
 
