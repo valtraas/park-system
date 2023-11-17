@@ -85,9 +85,12 @@ class UserController extends Controller
             'role_id'=>'required',
             'password'=>''
         ]);
-        if($request->has('password')){
+        if($request->filled('password')){
             $pass =  Hash::make($validate['password']);
         $validate['password'] = $pass;
+        }else{
+        $validate['password'] = $management->password;
+
         }
         $management->update($validate);
         notify()->success('Berhasil mengubah data operator','Edit Operator');
